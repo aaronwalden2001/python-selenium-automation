@@ -5,3 +5,11 @@ Feature: Test Scenarios for Search functionality
     When Input Car into search field
     And Click on search icon
     Then Product results for Car are shown
+
+
+
+  Scenario: User can search for a product1
+    Given Open Google page
+    When Input tree into search field
+    And Click on search icon
+    Then Product results for tree are shown
