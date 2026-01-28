@@ -13,3 +13,8 @@ Feature: Test Scenarios for Search functionality
     When Input tree into search field
     And Click on search icon
     Then Product results for tree are shown
+
+  Scenario: User can search for a product with a variable
+    Given user opens Target homepage
+    When user searches for "laptop"
+    Then search results are displayed

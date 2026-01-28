@@ -1,4 +1,7 @@
 from selenium import webdriver
+#gotta import explicit wait
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -11,6 +14,7 @@ driver_path = ChromeDriverManager().install()
 service = Service(driver_path)
 driver = webdriver.Chrome(service=service)
 driver.maximize_window()
+driver.wait = WebDriverWait(driver, 10)
 
 # open the url
 driver.get('https://www.google.com/')
@@ -19,10 +23,15 @@ driver.get('https://www.google.com/')
 search = driver.find_element(By.NAME, 'q')
 search.clear()
 search.send_keys('Table')
-
+search_btn = driver.find_element(By.NAME, 'btnK')
+#Explicit wait
+driver.wait.until(EC.element_to_be_clickable(search_btn)).click()
 # wait for 4 sec
 sleep(4)
+#Implicit Wait - wait 5secs or less for all find element(s) parameters
+driver.implicitly_wait(5)
 
+#explicit wait - wait until condition
 # click search button
 driver.find_element(By.NAME, 'btnK').click()
 

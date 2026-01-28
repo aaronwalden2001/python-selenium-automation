@@ -21,3 +21,10 @@ Feature: Tests for search,sign in, and cart function
     When user clicks Sign In button
     And user clicks Sign In from side navigation
     Then Sign In form is displayed
+
+
+ #Feature: Search with variable
+  Scenario: User can search for a product with a variable
+    Given Open Target main page
+    When user searches for "laptop"
+    Then search results are displayed

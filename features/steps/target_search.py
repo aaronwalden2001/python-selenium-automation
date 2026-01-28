@@ -53,3 +53,17 @@ def second_sign_in_sidemenu(context):
 def sign_in_form(context):
     context.driver.find_element(By.XPATH, "//div[@class = 'sc-e288a325-2 cwgIAc'")
     sleep(5)
+
+#Search with variable
+
+@when('user searches for "{product}"')
+def search_product(context, product):
+    search_box = context.driver.find_element(By.XPATH, "//button[@aria-label='search']")
+    search_box.send_keys(product)
+    search_box.submit()
+    sleep(3)
+
+@then('search results are displayed')
+def search_results(context):
+    results = context.driver.find_elements(By.XPATH, "//div[@data-test='product-grid']")
+    assert len(results) > 0
