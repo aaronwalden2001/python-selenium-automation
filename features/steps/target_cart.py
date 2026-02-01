@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from behave import when, then
+from behave import given, when, then
+from pages.main_page import MainPage
+from pages.cart_page import CartPage
 from time import sleep
 
 @when("user adds a product to cart")
@@ -57,3 +59,9 @@ def verify_cart(context):
     )
 
     assert len(cart_items) > 0
+
+@then('user sees empty cart message')
+def verify_empty_cart(context):
+    cart_page = CartPage(context.driver)
+    assert cart_page.is_cart_empty_message_displayed()
+

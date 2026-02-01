@@ -2,14 +2,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from behave import given, when, then
+from pages.main_page import MainPage
+from pages.cart_page import CartPage
 from time import sleep
 
 @given('Open Target main page')
-def open_main(context):
-    context.driver.get('https://www.target.com/')
-    WebDriverWait(context.driver, 10).until(
-        EC.presence_of_element_located((By.ID, 'search'))
-    )
+def step_open_home(context):
+    context.home_page = MainPage(context.driver)
+    context.main_page.open()
 
 
 @when('Search for tea')
@@ -47,13 +47,8 @@ def sign_in_page(context):
 
 #Cart functionality
 @when('user clicks on cart icon')
-def click_cart_icon(context):
-    cart_icon = WebDriverWait(context.driver, 10).until(
-        EC.element_to_be_clickable(
-            (By.XPATH, "//a[@href='/cart']")
-        )
-    )
-    cart_icon.click()
+def cart_click_icon(context):
+    context.main_page.click_cart()
 
 @then('user sees cart empty message')
 def cart_empty_message(context):
