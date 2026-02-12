@@ -2,5 +2,6 @@ from pages.base_page import Page
 
 
 class PrivacyPolicyPage(Page):
-    def __init__(self, driver):
-        super().__init__(driver)
+
+    def verify_page_opened(self):
+        self.verify_url_contains('target-privacy-policy')

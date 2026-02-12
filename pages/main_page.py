@@ -1,12 +1,6 @@
-from selenium.webdriver.common.by import By
-from pages.base_page import BasePage
+from pages.base_page import Page
 
-class MainPage(BasePage):
+class MainPage(Page):
 
-    CART_ICON = (By.XPATH, "//a[contains(@href,'/cart')]")
-
-    def open(self):
-        self.driver.get("https://www.target.com/")
-
-    def click_cart(self):
-        self.click(self.CART_ICON)
+    def open_main_page(self):
+        self.open_url()

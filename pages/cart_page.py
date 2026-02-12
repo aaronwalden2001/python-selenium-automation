@@ -1,11 +1,26 @@
 from selenium.webdriver.common.by import By
-from pages.base_page import BasePage
 
-class CartPage(BasePage):
+from pages.base_page import Page
 
-    EMPTY_CART_MESSAGE = (
-        By.XPATH, "//h1[contains(text(),'Your cart is empty')]"
-    )
 
-    def is_cart_empty_message_displayed(self):
-        return self.wait_for_element(self.EMPTY_CART_MESSAGE).is_displayed()
+class CartPage(Page):
+    EMPTY_ACRT_MSG = (By.CSS_SELECTOR, "[data-test='boxEmptyMsg']")
+    empty_cart_msg = 'Your cart is empty'
+
+    def open_cart_page(self):
+        self.open_url('/cart')
+
+    def verify_empty_cart_msg(self):
+        self.verify_partial_text(self.empty_cart_msg, *self.EMPTY_ACRT_MSG)
+        # self.wait_until_url_contains('cart')
+        # self.verify_url(f'{self.base_url}/cart')
+
+        # empty_msg_element = self.find_element(*self.EMPTY_ACRT_MSG)
+        # print(empty_msg_element)
+        # print(empty_msg_element.text)
+        #
+        # self.driver.refresh() # refresh the webpage
+        # print('\nAfter Refresh: \n')
+        # empty_msg_element = self.find_element(*self.EMPTY_ACRT_MSG)
+       #  print(empty_msg_element)
+       #  print(empty_msg_element.text)
